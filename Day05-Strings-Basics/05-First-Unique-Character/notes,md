@@ -1,1 +1,47 @@
+# Notes — First Unique Character
 
+## Idea
+
+We need the index of the first character that appears
+exactly once.
+
+We use two passes.
+
+## Approach
+
+### Pass 1
+
+Count every character.
+
+Example:
+
+"leetcode"
+
+l → 1
+e → 3
+t → 1
+c → 1
+o → 1
+d → 1
+
+### Pass 2
+
+Go through the string from left to right.
+
+The first character with count == 1 is the answer.
+
+## Important Java Functions
+
+toCharArray()
+charAt()
+length()
+
+## Complexity
+
+Time: O(n)
+Space: O(1)
+
+## Key Learning
+
+When the question asks about character frequency,
+think about a frequency array or HashMap.
