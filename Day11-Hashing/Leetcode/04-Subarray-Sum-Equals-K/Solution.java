@@ -1,21 +1,27 @@
-from collections import defaultdict
+import java.util.*;
 
-class Solution:
-    def subarraySum(self, nums, k):
-        prefix_count = defaultdict(int)
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixCount = new HashMap<>();
 
-        # Empty prefix
-        prefix_count[0] = 1
+        prefixCount.put(0, 1);
 
-        prefix_sum = 0
-        result = 0
+        int prefixSum = 0;
+        int result = 0;
 
-        for num in nums:
-            prefix_sum += num
+        for (int num : nums) {
+            prefixSum += num;
 
-            # prefix_sum - previous_sum = k
-            result += prefix_count[prefix_sum - k]
+            int required = prefixSum - k;
 
-            prefix_count[prefix_sum] += 1
+            result += prefixCount.getOrDefault(required, 0);
 
-        return result
+            prefixCount.put(
+                prefixSum,
+                prefixCount.getOrDefault(prefixSum, 0) + 1
+            );
+        }
+
+        return result;
+    }
+}
