@@ -1,19 +1,40 @@
-from collections import Counter
+import java.util.*;
 
-class Solution:
-    def topKFrequent(self, nums, k):
-        freq = Counter(nums)
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> freq = new HashMap<>();
 
-        buckets = [[] for _ in range(len(nums) + 1)]
+        for (int num : nums) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
 
-        for num, count in freq.items():
-            buckets[count].append(num)
+        List<Integer>[] buckets = new ArrayList[nums.length + 1];
 
-        result = []
+        for (int num : freq.keySet()) {
+            int count = freq.get(num);
 
-        for count in range(len(buckets) - 1, 0, -1):
-            for num in buckets[count]:
-                result.append(num)
+            if (buckets[count] == null) {
+                buckets[count] = new ArrayList<>();
+            }
 
-                if len(result) == k:
-                    return result
+            buckets[count].add(num);
+        }
+
+        int[] result = new int[k];
+        int index = 0;
+
+        for (int count = buckets.length - 1; count >= 0 && index < k; count--) {
+            if (buckets[count] != null) {
+                for (int num : buckets[count]) {
+                    result[index++] = num;
+
+                    if (index == k) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+}
