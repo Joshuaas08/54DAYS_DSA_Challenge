@@ -1,20 +1,32 @@
-class Solution:
-    def longestConsecutive(self, nums):
-        num_set = set(nums)
-        longest = 0
+import java.util.*;
 
-        for num in num_set:
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
 
-            # Start only if num is the beginning
-            # of a sequence.
-            if num - 1 not in num_set:
-                current = num
-                length = 1
+        for (int num : nums) {
+            set.add(num);
+        }
 
-                while current + 1 in num_set:
-                    current += 1
-                    length += 1
+        int longest = 0;
 
-                longest = max(longest, length)
+        for (int num : set) {
 
-        return longest
+            // Start of a sequence
+            if (!set.contains(num - 1)) {
+
+                int current = num;
+                int length = 1;
+
+                while (set.contains(current + 1)) {
+                    current++;
+                    length++;
+                }
+
+                longest = Math.max(longest, length);
+            }
+        }
+
+        return longest;
+    }
+}
