@@ -1,15 +1,21 @@
-from collections import defaultdict
+import java.util.*;
 
-class Solution:
-    def groupAnagrams(self, strs):
-        groups = defaultdict(list)
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
 
-        for s in strs:
-            count = [0] * 26
+        for (String s : strs) {
+            int[] count = new int[26];
 
-            for ch in s:
-                count[ord(ch) - ord('a')] += 1
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++;
+            }
 
-            groups[tuple(count)].append(s)
+            String key = Arrays.toString(count);
 
-        return list(groups.values())
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+}
