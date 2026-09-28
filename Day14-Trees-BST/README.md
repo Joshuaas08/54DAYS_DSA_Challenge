@@ -22,7 +22,7 @@ A binary tree node has:
 
 - A value
 - Left child
-- Right child
+- Right chid
 
 ```java
 class TreeNode {
