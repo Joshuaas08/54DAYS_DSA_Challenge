@@ -59,4 +59,4 @@ Here:
 
 isPalindrome(...)
 
-acts as a filter that prevents invalid branches.
+  acts as a filter that prevents invalid branches.
