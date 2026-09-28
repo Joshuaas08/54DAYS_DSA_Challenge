@@ -1,1 +1,33 @@
+class Solution {
 
+    private int count = 0;
+    private int result = 0;
+
+    public int kthSmallest(TreeNode root, int k) {
+
+        inorder(root, k);
+
+        return result;
+    }
+
+    private void inorder(TreeNode node, int k) {
+
+        if (node == null) {
+            return;
+        }
+
+        // Visit left subtree
+        inorder(node.left, k);
+
+        // Visit current node
+        count++;
+
+        if (count == k) {
+            result = node.val;
+            return;
+        }
+
+        // Visit right subtree
+        inorder(node.right, k);
+    }
+}
